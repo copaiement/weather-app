@@ -1,5 +1,6 @@
 import './style.css';
 
+import { getLegitIcon } from './domFunctions';
 // weather API Key:
 // 400f15b7cc534eb7850174113230505
 
@@ -35,7 +36,7 @@ function validateInput(input) {
 }
 
 async function getWeather(loc) {
-  let response = await fetch(`https://api.weatherapi.com/v1/current.json?key=400f15b7cc534eb7850174113230505&q=${loc}`, { mode: 'cors' });
+  let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=400f15b7cc534eb7850174113230505&q=${loc}&days=7&aqi=no&alerts=no`, { mode: 'cors' });
   let weather = await response.json();
   return weather;
 }
@@ -47,15 +48,20 @@ function updatePage(loc) {
   const windDirection = document.querySelector('.wind-direction');
 
   getWeather(loc).then((weather) => {
+    console.log(weather);
     location.textContent = weather.location.name;
     temp.textContent = weather.current.temp_f;
     windSpeed.textContent = weather.current.wind_mph;
     windDirection.textContent = weather.current.wind_dir;
+    const icon = document.createElement('div');
+    const body = document.querySelector('body');
+    body.appendChild(icon);
+    icon.classList.add('icon');
+    icon.innerHTML = getLegitIcon(weather.current.condition.code, weather.current.is_day);
   })
     .catch(() => {
       location.textContent = 'Location Not Found!';
     });
-
 }
 
 function initialize() {
