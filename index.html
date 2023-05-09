@@ -9,12 +9,37 @@
   <script src="./main.js" defer></script>
 </head>
 <body>
-  <label for="loc">Zip Code:</label>
-  <input id="loc" type="text">
-  <button id="submit-loc">Get Forecast</button>
-  <div class="location"></div>
-  <div class="current-temp"></div>
-  <div class="wind-speed"></div>
-  <div class="wind-direction"></div>
+  <div class="header">
+
+  </div>
+  <div class="content">
+    <div class="search">
+      <label for="loc">Location</label>
+      <input id="loc" type="text">
+      <button id="submit-loc">Get Forecast</button>
+    </div>
+    <div class="todays-weather">
+      <div class="location">
+        <div class="location-name"></div>
+        <div class="weather-overview"></div>
+      </div>
+      <div class="temp">
+        <div class="current-temp"></div>
+      </div>
+      <div class="rain">
+        <div class="rain-chance"></div>
+        <div class="humidity"></div>
+      </div>
+      <div class="wind">
+        <div class="wind-speed"></div>
+        <div class="wind-direction"></div>
+      </div>
+    </div>
+    <div class="forecast">
+
+    </div>
+  </div>
+
+
 </body>
 </html>
