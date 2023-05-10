@@ -13,7 +13,7 @@ function getLoc() {
 }
 
 function validateLocInput(input) {
-  const regexCity = /^[a-z\s]{2,}$/gi;
+  const regexCity = /^[a-z\s,]{2,}$/gi;
   const regexZip = /([0-9]{5})/g;
   if (regexCity.test(input.value)) {
     return true;

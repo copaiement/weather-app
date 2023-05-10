@@ -1,3 +1,10 @@
+//import { getDay, getDate, getMonth } from 'date-fns';
+import getDay from 'date-fns/getDay';
+import getDate from 'date-fns/getDate';
+import getMonth from 'date-fns/getMonth';
+import parseJSON from 'date-fns/parseJSON';
+import fromUnixTime from 'date-fns/fromUnixTime';
+
 import { getCustomIcon, getLegitIcon } from './images';
 
 function clear(item) {
@@ -70,7 +77,7 @@ function buildDaily(forecast) {
 
 function buildForecast(forecast) {
   // clear forecast
-  clear('forecast');
+  clear('.forecast');
   // get container
   const content = document.querySelector('.content');
   // create forecast-container
@@ -114,8 +121,14 @@ function buildForecastOne(container, data) {
   hiTemp.classList.add('forecast-temp');
   loTemp.classList.add('forecast-temp');
   precip.classList.add('forecast-precip');
+  
+  // convert date
+  const dateConv = parseJSON(`${data.date}T12:00:00`);
+  const dayVal = getDOW(dateConv);
+  const month = getMonthName(dateConv);
+  const dateFormatted = getDateFormat(dateConv);
   // add data
-  date.textContent = data.date;
+  date.textContent = `${dayVal}, ${month} ${dateFormatted}`;
   condition.textContent = data.day.condition.text;
   icon.innerHTML = getLegitIcon(data.day.condition.code, 1);
   hiTemp.textContent = `${data.day.maxtemp_f} °F`;
@@ -156,6 +169,95 @@ function buildTodayOne(container, item, data, icon) {
   detail.textContent = `${data} ${modifier}`;
   // add icon
   iconContainer.innerHTML = getCustomIcon(icon);
+}
+
+function getDOW(date) {
+  console.log(date);
+  let day;
+  switch (getDay(date)) {
+    case 0:
+      day = 'Sunday';
+      break;
+    case 1:
+      day = 'Monday';
+      break;
+    case 2:
+      day = 'Tuesday';
+      break;
+    case 3:
+      day = 'Wednesday';
+      break;
+    case 4:
+      day = 'Thursday';
+      break;
+    case 5:
+      day = 'Friday';
+      break;
+    default:
+      day = 'Saturday';
+  }
+  return day;
+}
+
+function getMonthName(date) {
+  let month;
+  switch (getMonth(date)) {
+    case 1:
+      month = 'January';
+      break;
+    case 2:
+      month = 'February';
+      break;
+    case 3:
+      month = 'March';
+      break;
+    case 4:
+      month = 'April';
+      break;
+    case 5:
+      month = 'May';
+      break;
+    case 6:
+      month = 'June';
+      break;
+    case 7:
+      month = 'July';
+      break;
+    case 8:
+      month = 'August';
+      break;
+    case 9:
+      month = 'September';
+      break;
+    case 10:
+      month = 'October';
+      break;
+    case 11:
+      month = 'November';
+      break;
+    default:
+      month = 'December';
+  }
+  return month;
+}
+
+function getDateFormat(date) {
+  let day = getDate(date).toString();
+  const lastChar = day.charAt(day.length - 1);
+  switch (lastChar) {
+    case '1':
+      day += 'st';
+      break;
+    case '2':
+      day += 'nd';
+      break;
+    case '3':
+      day += 'rd';
+      break;
+    default:
+      day += 'th';
+  }
+  return day;
 }
 
 function buildPage(weatherObj) {
