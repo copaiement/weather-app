@@ -277,11 +277,46 @@ function getDateFormat(date) {
   return day;
 }
 
+function setBgColor(isDay) {
+  const body = document.querySelector('body');
+  const today = document.querySelector('.todays-weather');
+  const search = document.querySelector('.search');
+  const forecast = document.querySelector('.forecast');
+  if (isDay) {
+    if (body.classList.contains('dark')) {
+      body.classList.remove('dark');
+      today.classList.remove('dark-sub');
+      search.classList.remove('dark-sub');
+    }
+    body.classList.add('light');
+    today.classList.add('light-sub');
+    search.classList.add('light-sub');
+    forecast.classList.add('light-sub');
+  } else {
+    if (body.classList.contains('light')) {
+      body.classList.remove('light');
+      today.classList.remove('light-sub');
+      search.classList.remove('light-sub');
+    }
+    body.classList.add('dark');
+    today.classList.add('dark-sub');
+    search.classList.add('dark-sub');
+    forecast.classList.add('dark-sub');
+  }
+}
+
+function toggleLoader() {
+  const loader = document.querySelector('.loader-container');
+  loader.classList.toggle('hidden');
+}
+
 function buildPage(weatherObj) {
   buildLocation(weatherObj.location, weatherObj.current);
   buildCurrent(weatherObj.current, weatherObj.forecast);
   buildDaily(weatherObj.forecast);
   buildForecast(weatherObj.forecast);
+  setBgColor(weatherObj.current.is_day);
+  toggleLoader();
 }
 
-export { buildPage };
+export { buildPage, toggleLoader };
