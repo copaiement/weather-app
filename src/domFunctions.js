@@ -61,6 +61,8 @@ function buildDaily(forecast) {
   container.classList.add('today-daily');
   container.textContent = 'Daily Summary';
   todayContainer.appendChild(container);
+  // set container to hidden
+  container.classList.add('hidden');
   // day var
   const day = forecast.forecastday[0];
   // high temp
@@ -98,8 +100,12 @@ function buildForecastOne(container, data) {
   const icon = document.createElement('icon');
   const dataContainer = document.createElement('div');
   const tempContainer = document.createElement('div');
+  const hiTempDesc = document.createElement('div');
   const hiTemp = document.createElement('div');
+  const loTempDesc = document.createElement('div');
   const loTemp = document.createElement('div');
+  const precipContainer = document.createElement('div');
+  const precipDesc = document.createElement('div');
   const precip = document.createElement('div');
   // append to DOM
   container.appendChild(forecastDaily);
@@ -108,18 +114,26 @@ function buildForecastOne(container, data) {
   forecastDaily.appendChild(icon);
   forecastDaily.appendChild(dataContainer);
   dataContainer.appendChild(tempContainer);
-  dataContainer.appendChild(precip);
+  dataContainer.appendChild(precipContainer);
+  precipContainer.appendChild(precipDesc);
+  precipContainer.appendChild(precip);
+  tempContainer.appendChild(hiTempDesc);
   tempContainer.appendChild(hiTemp);
+  tempContainer.appendChild(loTempDesc);
   tempContainer.appendChild(loTemp);
   // add classes
   forecastDaily.classList.add('daily-forecast');
   date.classList.add('forecast-date');
   condition.classList.add('forecast-condition');
   icon.classList.add('forecast-icon');
-  dataContainer.classList.add('forecast-data');
-  tempContainer.classList.add('forecast-temp-container');
+  dataContainer.classList.add('forecast-data-container');
+  tempContainer.classList.add('forecast-data');
+  precipContainer.classList.add('forecast-data');
+  hiTempDesc.classList.add('data-desc');
   hiTemp.classList.add('forecast-temp');
+  loTempDesc.classList.add('data-desc');
   loTemp.classList.add('forecast-temp');
+  precipDesc.classList.add('data-desc');
   precip.classList.add('forecast-precip');
   
   // convert date
@@ -131,8 +145,11 @@ function buildForecastOne(container, data) {
   date.textContent = `${dayVal}, ${month} ${dateFormatted}`;
   condition.textContent = data.day.condition.text;
   icon.innerHTML = getLegitIcon(data.day.condition.code, 1);
+  hiTempDesc.textContent = 'High';
   hiTemp.textContent = `${data.day.maxtemp_f} °F`;
+  loTempDesc.textContent = 'Low';
   loTemp.textContent = `${data.day.mintemp_f} °F`;
+  precipDesc.textContent = 'Rain';
   precip.textContent = `${data.day.daily_chance_of_rain} %`;
 }
 

@@ -3,6 +3,8 @@ import { updatePage } from './apiFunctions';
 function initializeInputs() {
   const submitBtn = document.querySelector('#submit-loc');
   submitBtn.addEventListener('click', getLoc);
+  const currentDaily = document.querySelector('.current-daily');
+  currentDaily.addEventListener('click', toggleDaily);
 }
 
 function getLoc() {
@@ -26,4 +28,19 @@ function validateLocInput(input) {
   return false;
 }
 
-export { getLoc, initializeInputs };
+function toggleDaily() {
+  const daily = document.querySelector('.today-daily');
+  const current = document.querySelector('.today-current');
+  const btn = document.querySelector('.current-daily');
+  if (daily.classList.contains('hidden')) {
+    daily.classList.remove('hidden');
+    current.classList.add('hidden');
+    btn.textContent = 'Show Current Weather';
+  } else {
+    daily.classList.add('hidden');
+    current.classList.remove('hidden');
+    btn.textContent = 'Show Today\'s Forecast';
+  }
+}
+
+export { getLoc, initializeInputs, toggleDaily };

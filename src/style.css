@@ -68,5 +68,9 @@ img {
 }
 
 .forecast-precip {
-  
+
+}
+
+.hidden {
+  display: none;
 }
