@@ -39,7 +39,7 @@ function toggleDaily() {
   } else {
     daily.classList.add('hidden');
     current.classList.remove('hidden');
-    btn.textContent = 'Show Today\'s Forecast';
+    btn.textContent = 'Show Daily Summary';
   }
 }
 

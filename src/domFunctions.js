@@ -3,7 +3,6 @@ import getDay from 'date-fns/getDay';
 import getDate from 'date-fns/getDate';
 import getMonth from 'date-fns/getMonth';
 import parseJSON from 'date-fns/parseJSON';
-import fromUnixTime from 'date-fns/fromUnixTime';
 
 import { getCustomIcon, getLegitIcon } from './images';
 

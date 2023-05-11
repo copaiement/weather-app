@@ -1,5 +1,6 @@
 :root {
   font-size: 20px;
+  font-size: 2vh;
   font-family: 'Inter', sans-serif;
 
   /* colors */
@@ -69,8 +70,7 @@ body {
   background-color: var(--bg-color-light);
 }
 
-svg,
-img {
+svg {
   width: 2rem;
 }
 
